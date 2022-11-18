@@ -1,0 +1,16 @@
+# model:
+#   configs:
+#     saved_models_dir: "stego/saved_models"
+#     saved_model_name: "cocostuff27_vit_base_5.ckpt"
+#     NUM_MASK_POINT_THRES: 300 # Number of pixel of each class > NUM_MASK_POINT_THRES
+#     MASK_THRESHOLD: 0.5 # Threshold for binary image find contour
+#     TOLERANCE: 3 # approximate_polygon function
+#     NUM_POINTS_OF_CONTOUR_THRES: 15 # Minimum number of points in the polygon
+#     classes: [
+#             "electronic", "appliance", "food_1", "furniture_1", "indoor",
+#             "kitchen", "accessory", "animal", "outdoor", "person",
+#             "sports", "vehicle", "ceiling", "floor", "food_2",
+#             "furniture_2", "rawmaterial", "textile", "wall", "window",
+#             "building", "ground", "plant", "sky", "solid",
+#             "structural", "water"]
+

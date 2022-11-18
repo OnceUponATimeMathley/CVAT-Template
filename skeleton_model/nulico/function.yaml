@@ -1,0 +1,60 @@
+metadata:
+  name:            # The name of docker image:  ex: vbpo.stego_v2
+  namespace: cvat  # The name of nuclio project: Default: cvat
+  annotations:
+    name:               # The display name of model in localhost:8080/models
+    type: detector    # The type of model: https://opencv.github.io/cvat/docs/manual/advanced/models/
+    framework:          # The framework used in source code: ex: pytorch
+    help_message:       # The comment message for model
+
+    spec: | # List of dictionary of label: syntax: id, name: ex: { "id": 0, "name": "electronic" }
+      [
+      ]
+
+spec:
+  description:           # The description of model in localhost:8080/models
+  runtime:               # The runtime env: ex: 'python:3.9'
+  handler: main:handler  # The entrypoint for process the event, default: main:handler
+  eventTimeout: 60s      # The timeout of event: default: 60s
+  env:
+    - name: PYTHONPATH          # Define ENV variable with name, value
+      value:                    # The value of env name: ex: /opt/nuclio/stego . The stego folder contains all source code of the model.
+
+  build:
+    image:                  # The name of built docker images: project_name/metadata.name: 
+                            # ex: cvat/vbpo.stego
+    baseImage:              # The base image for build docker image: ex: ubuntu:22.04
+
+    directives:
+      preCopy:          # List of directive: (kind, value) pairs to build needed env for custom model. 
+        - kind:
+          value:
+
+          # ...........
+
+        - kind: RUN
+          value: ln -s /usr/bin/python3 /usr/bin/python
+
+      postCopy:
+        - kind: 
+          value: 
+    
+
+  triggers:
+    myHttpTrigger:
+      maxWorkers: 3
+      kind: 'http'
+      workerAvailabilityTimeoutMilliseconds: 20000
+      attributes:
+        maxRequestBodySize: 67108864 #33554432 # 32MB
+
+  platform:
+    attributes:
+      restartPolicy:
+        name: always
+        maximumRetryCount: 3
+      mountMode: volume
+
+  resources:
+    limits:
+      nvidia.com/gpu: 1
