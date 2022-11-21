@@ -27,9 +27,10 @@ class ModelHandler(BaseHandler):
                 convert it to numpy or tensor array,... corresponding to the input type of
                 your model.
             OUTPUT:
-                The object's polygon and it's mask.
-                return polygon, mask
-                polygon: [[100, 100], [200, 200], [100, 200], [100, 100]]
+                - The predicted mask tensor with shape H, W. Each pixel has the predicted 
+                class index from 0 to number of classes - 1
+                - The list of class: ['person', 'background',....]
+                return predict_mask, classes
         """
 
 

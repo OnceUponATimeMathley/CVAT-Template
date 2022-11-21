@@ -29,7 +29,7 @@ class ModelHandler(BaseHandler):
             OUTPUT:
                 The list of elements contain:
                     - label: string type
-                    - xcenter, y_center, width, height: the value in [0, 1]
+                    - xcenter, ycenter, width, height: the value in [0, 1]
                     - conf: float type
         """
 
